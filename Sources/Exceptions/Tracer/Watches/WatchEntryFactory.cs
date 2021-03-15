@@ -2,16 +2,16 @@ using System;
 
 namespace ExceptionsHandlerService.Exceptions
 {
-	public class TraceContextEntryFactory
+	public class WatchEntryFactory
 	{
 		private readonly ExceptionsContextsFactory _contextsFactory;  
 		
-		public TraceContextEntryFactory(ExceptionsContextsFactory contextsFactory)
+		public WatchEntryFactory(ExceptionsContextsFactory contextsFactory)
 		{
 			_contextsFactory = contextsFactory ?? throw new ArgumentNullException(nameof(contextsFactory));
 		}
 
-		public TraceContextEntry Create(TraceData data)
+		public WatchEntry Create(WatchData data)
 		{
 			return null;
 		}

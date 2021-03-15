@@ -5,13 +5,13 @@ using ExceptionsHandlerService.Attributes;
 namespace ExceptionsHandlerService.Exceptions
 {
 	public class FieldHandler 
-		: BaseTraceHandler
+		: BaseWatchHandler
 	{
 		private readonly FieldInfo _info;
 
 		protected override bool IsPrimitive { get; }
 
-		public FieldHandler(FieldInfo info, TraceAttribute attribute)
+		public FieldHandler(FieldInfo info, WatchAttribute attribute)
 			: base(attribute)
 		{
 			_info = info ?? throw new ArgumentNullException(nameof(info));
@@ -19,9 +19,9 @@ namespace ExceptionsHandlerService.Exceptions
 			IsPrimitive = _info.FieldType.Assembly.GetName().Name == "System";
 		}
 
-		public override TraceData CreateTraceData(object contextObject)
+		public override WatchData CreateTraceData(object contextObject)
 		{
-			return new TraceData
+			return new WatchData
 			(
 				_info.GetValue(contextObject),
 				_info.Name,

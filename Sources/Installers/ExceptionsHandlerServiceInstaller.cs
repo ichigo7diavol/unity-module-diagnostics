@@ -63,9 +63,16 @@ namespace ExceptionsHandlerService.Installers
 
 		private void BindServices()
 		{
+#if UNITY
 			Container
 				.BindInterfacesAndSelfTo<ConsoleLogger>()
 				.AsSingle();
+
+#else
+			Container
+				.BindInterfacesAndSelfTo<ConsoleLogger.ConsoleAppLogger>()
+				.AsSingle();
+#endif
 		}
 	}
 }

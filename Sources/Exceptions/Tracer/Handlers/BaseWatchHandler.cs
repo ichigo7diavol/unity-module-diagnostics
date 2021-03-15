@@ -5,14 +5,14 @@ using ExceptionsHandlerService.Attributes;
 
 namespace ExceptionsHandlerService.Exceptions
 {
-	public abstract class BaseTraceHandler 
-		: ITraceHandler
+	public abstract class BaseWatchHandler 
+		: IWatchHandler
 	{
-		protected TraceAttribute Attribute { get; }
+		protected WatchAttribute Attribute { get; }
 
 		protected abstract bool IsPrimitive { get; }
 
-		protected BaseTraceHandler(TraceAttribute attribute)
+		protected BaseWatchHandler(WatchAttribute attribute)
 		{
 			Attribute = attribute ?? throw new ArgumentNullException(nameof(attribute));
 		}
@@ -22,6 +22,6 @@ namespace ExceptionsHandlerService.Exceptions
 			return Enumerable.Empty<string>();
 		}
 
-		public abstract TraceData CreateTraceData(object contextObject);
+		public abstract WatchData CreateTraceData(object contextObject);
 	}
 }

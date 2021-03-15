@@ -10,7 +10,7 @@ namespace ExceptionsHandlerService.Exceptions
 	{
 		private const BindingFlags MembersFlag = (BindingFlags) ((long) -1);
 		
-		private readonly Type TracingAttribute = typeof(TraceAttribute);
+		private readonly Type TracingAttribute = typeof(WatchAttribute);
 		
 		private readonly Dictionary<Type, HandlersContainer> _cache 
 			= new Dictionary<Type, HandlersContainer>();
@@ -38,7 +38,7 @@ namespace ExceptionsHandlerService.Exceptions
 			var attributes = members
 				.Select(m => Attribute.GetCustomAttribute(m, TracingAttribute))
 				.Where(a => a != null)
-				.Cast<TraceAttribute>();
+				.Cast<WatchAttribute>();
 			
 			// attributes.First().
 

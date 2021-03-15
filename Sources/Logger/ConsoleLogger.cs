@@ -1,5 +1,10 @@
 ﻿using System;
-// using UnityEngine;
+
+#if UNITY
+
+using UnityEngine;
+
+#endif
 
 namespace ExceptionsHandlerService.Logger
 {
@@ -7,27 +12,63 @@ namespace ExceptionsHandlerService.Logger
 	{
 		public ConsoleLogger()
 		{
-			//TODO: add log formatter
+#if UNITY
+#endif
 		}
 
 		public void LogMessage(string message)
 		{
-			// Debug.Log(message);
+#if UNITY
+			Debug.Log(message);
+#endif
 		}
 
 		public void LogWarning(string message)
 		{
-			// Debug.LogWarning(message);
+#if UNITY
+			Debug.LogWarning(message);
+#endif
 		}
 
 		public void LogError(string message)
 		{
-			// Debug.LogError(message);
+#if UNITY
+			Debug.LogError(message);
+#endif
 		}
 
 		public void LogException(Exception exception)
 		{
-			// Debug.LogException(exception);
+#if UNITY
+			Debug.LogException(exception);
+#endif
+		}
+
+		public class ConsoleAppLogger : ILogger
+		{
+			public ConsoleAppLogger()
+			{
+			}
+
+			public void LogMessage(string message)
+			{
+				Console.WriteLine(message);
+			}
+
+			public void LogWarning(string message)
+			{
+				Console.WriteLine(message);
+			}
+
+			public void LogError(string message)
+			{
+				Console.WriteLine(message);
+			}
+
+			public void LogException(Exception exception)
+			{
+				Console.WriteLine(exception);
+			}
 		}
 	}
 }

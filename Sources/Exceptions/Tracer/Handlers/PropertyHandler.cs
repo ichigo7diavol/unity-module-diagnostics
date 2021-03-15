@@ -7,13 +7,13 @@ using ExceptionsHandlerService.Attributes;
 namespace ExceptionsHandlerService.Exceptions
 {
 	public class PropertyHandler 
-		: BaseTraceHandler
+		: BaseWatchHandler
 	{
 		private readonly PropertyInfo _info;
 
 		protected override bool IsPrimitive { get; }
 
-		public PropertyHandler(PropertyInfo info, TraceAttribute attribute)
+		public PropertyHandler(PropertyInfo info, WatchAttribute attribute)
 			: base(attribute)
 		{
 			_info = info ?? throw new ArgumentNullException(nameof(info));
@@ -21,9 +21,9 @@ namespace ExceptionsHandlerService.Exceptions
 			IsPrimitive = _info.PropertyType.Assembly.GetName().Name == "System";
 		}
 
-		public override TraceData CreateTraceData(object contextObject)
+		public override WatchData CreateTraceData(object contextObject)
 		{
-			return new TraceData
+			return new WatchData
 			(
 				_info.GetValue(contextObject), 
 				_info.Name, 
