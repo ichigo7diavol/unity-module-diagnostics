@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using DiagnosticsService.Containers;
-using DiagnosticsService.Exceptions;
+using DiagnosticsService.ExceptionContext;
 using DiagnosticsService.Handlers;
 using DiagnosticsService.Logger;
 using DiagnosticsService.Watches;
@@ -58,14 +58,14 @@ namespace DiagnosticsService.Installers
 				.AsSingle();
 			
 			Container
-				.BindInterfacesAndSelfTo<StartupExceptionHandlersContainer>()
+				.BindInterfacesAndSelfTo<PreloaderExceptionHandlersContainer>()
 				.AsSingle();
 		}
 
 		private void BindHandlers()
 		{
 			BindBaseExceptionHandlersToHandlersContainer<
-				StartupExceptionHandlersContainer>();
+				PreloaderExceptionHandlersContainer>();
 		}
 
 		private void BindBaseExceptionHandlersToHandlersContainer<T>()

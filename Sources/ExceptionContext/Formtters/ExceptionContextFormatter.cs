@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Text;
 
-namespace DiagnosticsService.Exceptions
+namespace DiagnosticsService.ExceptionContext
 {
     public class ExceptionContextFormatter 
         : IExceptionContextFormatter

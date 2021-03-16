@@ -1,6 +1,6 @@
 using System;
 
-namespace DiagnosticsService.Exceptions
+namespace DiagnosticsService.ExceptionContext
 {
 	public class ExceptionContext
 	{
@@ -9,12 +9,16 @@ namespace DiagnosticsService.Exceptions
 		
 		public ExceptionContext(IWatchContainerEntry rootEntry, IExceptionContextFormatter formatter)
 		{
-			_rootEntry = rootEntry ?? throw new ArgumentNullException(nameof(rootEntry));
+			_rootEntry = rootEntry;
 			_formatter = formatter ?? throw new ArgumentNullException(nameof(formatter));
 		}
 
 		public string GetContext()
 		{
+			if (_rootEntry == null)
+			{
+				return "Root Entry of Watchers is Empty!";
+			}
 			return _formatter.FormatEntries(_rootEntry);
 		}
 	}

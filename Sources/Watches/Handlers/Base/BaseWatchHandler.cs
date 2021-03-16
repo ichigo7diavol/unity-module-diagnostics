@@ -1,7 +1,7 @@
 using System;
 using DiagnosticsService.Attributes;
 
-namespace DiagnosticsService.Exceptions
+namespace DiagnosticsService.ExceptionContext
 {
 	public abstract class BaseWatchHandler 
 		: IWatchHandler

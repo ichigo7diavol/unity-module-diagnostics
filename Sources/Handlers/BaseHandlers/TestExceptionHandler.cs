@@ -1,6 +1,6 @@
 using System;
 using DiagnosticsService.Logger;
-using DiagnosticsService.Exceptions;
+using DiagnosticsService.ExceptionContext;
 
 namespace DiagnosticsService.Handlers
 {

@@ -2,7 +2,7 @@ using System;
 using System.Reflection;
 using DiagnosticsService.Attributes;
 
-namespace DiagnosticsService.Exceptions
+namespace DiagnosticsService.ExceptionContext
 {
 	public class FieldWatchHandler 
 		: BaseWatchHandler

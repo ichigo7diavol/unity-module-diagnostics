@@ -1,14 +1,14 @@
 using System.Collections.Generic;
-using DiagnosticsService.Exceptions;
+using DiagnosticsService.ExceptionContext;
 using DiagnosticsService.Handlers;
 using DiagnosticsService.Logger;
 
 namespace DiagnosticsService.Containers
 {
-	public class StartupExceptionHandlersContainer 
+	public class PreloaderExceptionHandlersContainer 
 		: BaseExceptionHandlersContainer
 	{
-		public StartupExceptionHandlersContainer(ILogger logger
+		public PreloaderExceptionHandlersContainer(ILogger logger
 			, List<IExceptionHandler> exceptionsHandlers
 			, ExceptionsContextsFactory contextsFactory) 
 			: base(logger, exceptionsHandlers, contextsFactory)

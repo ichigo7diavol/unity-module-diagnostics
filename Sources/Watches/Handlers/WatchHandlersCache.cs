@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using DiagnosticsService.Attributes;
-using DiagnosticsService.Exceptions;
+using DiagnosticsService.ExceptionContext;
 
 namespace DiagnosticsService.Watches
 {
@@ -23,7 +23,6 @@ namespace DiagnosticsService.Watches
             {
                 throw new ArgumentNullException(nameof(type));
             }
-            
             var watchableAttribute = type.GetCustomAttribute(WatchableAttributeType, true) 
                 as WatchableAttribute;
             

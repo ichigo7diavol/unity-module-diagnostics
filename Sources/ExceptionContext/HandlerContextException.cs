@@ -1,6 +1,6 @@
 using System;
 
-namespace DiagnosticsService.Exceptions
+namespace DiagnosticsService.ExceptionContext
 {
 	// TODO: rename
 	public class HandlerContextException : Exception

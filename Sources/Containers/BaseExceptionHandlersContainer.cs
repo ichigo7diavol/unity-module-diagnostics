@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DiagnosticsService.Exceptions;
+using DiagnosticsService.ExceptionContext;
 using DiagnosticsService.Handlers;
 using DiagnosticsService.Logger;
 
@@ -43,10 +43,6 @@ namespace DiagnosticsService.Containers
 			{
 				throw new ArgumentNullException(nameof(exception));
 			}
-			if (_contextualObject == null)
-			{
-				throw new Exception("Context are not initialized!");
-			}
 			var handler = ExceptionsHandlers
 				.FirstOrDefault(h => h.IsValid(exception));
 
@@ -62,6 +58,10 @@ namespace DiagnosticsService.Containers
 			}
 			catch (Exception e)
 			{
+				if (_contextualObject == null)
+				{
+					throw e;
+				}
 				var context = _contextsFactory.Create(_contextualObject);
 				
 				throw new Exception(context.GetContext(), e);

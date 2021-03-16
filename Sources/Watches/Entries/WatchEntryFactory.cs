@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DiagnosticsService.Watches;
 
-namespace DiagnosticsService.Exceptions
+namespace DiagnosticsService.ExceptionContext
 {
 	public class WatchEntryFactory
 	{
@@ -18,6 +18,11 @@ namespace DiagnosticsService.Exceptions
 		public IWatchContainerEntry CreateRootEntry(Type type, object contextualObject)
 		{
 			var rootHandler = _cache.Get(contextualObject.GetType());
+			
+			if (rootHandler == null)
+			{
+				return null;
+			}
 			var data = rootHandler.GetWatchData(contextualObject);
 			
 			return CreateContainerEntry(data);
@@ -25,7 +30,8 @@ namespace DiagnosticsService.Exceptions
 		
 		private IWatchEntry Create(WatchData data)
 		{
-			var containerWatchHandler = _cache.Get(data.MemberValue?.GetType() ?? data.MemberType);
+			var containerWatchHandler = _cache
+				.Get(data.MemberValue?.GetType() ?? data.MemberType);
 			
 			if (containerWatchHandler != null)
 			{
@@ -34,7 +40,6 @@ namespace DiagnosticsService.Exceptions
 			return CreateEntry(data);
 		}
 
-		//TODO: delegate values check
 		private IWatchEntry CreateEntry(WatchData data)
 		{
 			var value = data.MemberType.IsClass && !(data.MemberValue is string)
@@ -54,6 +59,7 @@ namespace DiagnosticsService.Exceptions
 			{
 				childEntries = data.ChildData
 					.Select(Create)
+					.Where(e => e != null)
 					.ToList();
 			}
 			return new WatchContainerEntry(data.MemberType, data.MemberName, childEntries);

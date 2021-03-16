@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace DiagnosticsService.Exceptions
+namespace DiagnosticsService.ExceptionContext
 {
 	public interface IWatchHandlersContainer 
 		: IWatchHandler
