@@ -17,7 +17,7 @@ namespace ExceptionsHandlerService.Exceptions
 				: value;
 		}
 
-		public override IEnumerable<string> GetValue()
+		public override IEnumerable<string> AsStringEntry()
 		{
 			return Enumerable.Empty<string>().Append(Value);
 		}

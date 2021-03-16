@@ -3,14 +3,13 @@ using System;
 namespace ExceptionsHandlerService.Attributes
 {
 	[AttributeUsage(AttributeTargets.Field 
-		| AttributeTargets.Property 
-		| AttributeTargets.Class 
-		| AttributeTargets.Struct
+		| AttributeTargets.Property
 		, AllowMultiple = false)
 	]
 	public class WatchAttribute : Attribute
 	{
 		public string WatchName { get; }
+		public bool IsIgnored { get; }
 
 		public WatchAttribute() { }
 		
@@ -21,6 +20,11 @@ namespace ExceptionsHandlerService.Attributes
 				throw new ArgumentNullException(nameof(watchName));
 			}
 			WatchName = watchName;
+		}
+
+		public WatchAttribute(bool isIgnored)
+		{
+			IsIgnored = isIgnored;
 		}
 	}
 }

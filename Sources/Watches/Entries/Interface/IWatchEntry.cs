@@ -8,6 +8,6 @@ namespace ExceptionsHandlerService.Exceptions
         Type MemberType { get; }
         string MemberName { get; }
 
-        IEnumerable<string> GetValue();
+        IEnumerable<string> AsStringEntry();
     }
 }

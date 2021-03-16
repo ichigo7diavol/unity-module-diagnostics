@@ -18,6 +18,6 @@ namespace ExceptionsHandlerService.Exceptions
                 : memberName;
         }
 
-        public abstract IEnumerable<string> GetValue();
+        public abstract IEnumerable<string> AsStringEntry();
     }
 }

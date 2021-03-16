@@ -22,9 +22,10 @@ namespace ExceptionsHandlerService.Exceptions
             , ICollection<IWatchEntry> childs) 
             : base(memberType, memberName)
         {
-            if (childs == null) throw new ArgumentNullException(nameof(childs));
-			
-            _childMembers.AddRange(childs);
+            if (childs != null)
+            {
+                _childMembers.AddRange(childs);
+            }
         }
 
         public void AddChild(IWatchEntry child)
@@ -36,9 +37,9 @@ namespace ExceptionsHandlerService.Exceptions
             _childMembers.Add(child);
         }
 
-        public override IEnumerable<string> GetValue()
+        public override IEnumerable<string> AsStringEntry()
         {
-            return _childMembers.SelectMany(m => m.GetValue());
+            return _childMembers.SelectMany(m => m.AsStringEntry());
         }
     }
 }

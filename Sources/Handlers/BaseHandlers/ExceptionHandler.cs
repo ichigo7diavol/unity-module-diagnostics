@@ -19,6 +19,7 @@ namespace ExceptionsHandlerService.Handlers
 			{
 				throw new ArgumentNullException(nameof(exception));
 			}
+			throw exception;
 		}
 
 		public override bool IsValid(Exception exception)

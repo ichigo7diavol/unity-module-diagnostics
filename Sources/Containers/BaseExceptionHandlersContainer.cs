@@ -1,28 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ExceptionsHandlerService.Exceptions;
 using ExceptionsHandlerService.Handlers;
 using ExceptionsHandlerService.Logger;
 
 namespace ExceptionsHandlerService.Containers
 {
-	public abstract class BaseExceptionHandlersContainer 
+	public abstract class BaseExceptionHandlersContainer<T>
 		: IExceptionHandlersContainer
+		where T : class
 	{
+		private readonly ExceptionsContextsFactory _contextsFactory;
+		private T _contextualObject;
+		
 		protected ILogger Logger { get; }
 		
 		protected List<IExceptionHandler> ExceptionsHandlers { get; }
 
-		public BaseExceptionHandlersContainer(ILogger logger,
-			List<IExceptionHandler> exceptionsHandlers)
+		public BaseExceptionHandlersContainer(ILogger logger
+			, List<IExceptionHandler> exceptionsHandlers
+			, ExceptionsContextsFactory contextsFactory)
 		{
-			Logger = logger ?? throw new ArgumentNullException(nameof(logger));
+			Logger = logger 
+			    ?? throw new ArgumentNullException(nameof(logger));
 
-			if (exceptionsHandlers == null)
-			{
-				throw new ArgumentNullException(nameof(exceptionsHandlers));
-			}
-			ExceptionsHandlers = exceptionsHandlers;
+			_contextsFactory = contextsFactory 
+			                   ?? throw new ArgumentNullException(nameof(contextsFactory));
+
+			ExceptionsHandlers = exceptionsHandlers 
+			    ?? throw new ArgumentNullException(nameof(exceptionsHandlers));
+		}
+
+		public void PassContext(object contextualObject)
+		{
+			_contextualObject = (contextualObject as T)  
+			    ?? throw new ArgumentNullException(nameof(contextualObject));
 		}
 
 		public void Handle(Exception exception)
@@ -31,16 +44,29 @@ namespace ExceptionsHandlerService.Containers
 			{
 				throw new ArgumentNullException(nameof(exception));
 			}
+			if (_contextualObject == null)
+			{
+				throw new Exception("Context are not initialized!");
+			}
 			var handler = ExceptionsHandlers
 				.FirstOrDefault(h => h.IsValid(exception));
 
-			if (handler == null)
+			try
 			{
-				HandleDefaultException(exception);
+				if (handler == null)
+				{
+					HandleDefaultException(exception);
 
-				return;
+					return;
+				}
+				handler.Handle(exception);
 			}
-			handler.Handle(exception);
+			catch (Exception e)
+			{
+				var context = _contextsFactory.Create(_contextualObject);
+				
+				throw new Exception(context.GetContext(), e);
+			}
 		}
 
 		protected virtual void HandleDefaultException(Exception exception)

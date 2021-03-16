@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using ExceptionsHandlerService.Containers;
+using ExceptionsHandlerService.Exceptions;
 using ExceptionsHandlerService.Handlers;
 using ExceptionsHandlerService.Logger;
+using ExceptionsHandlerService.Watches;
 using Zenject;
 
 namespace ExceptionsHandlerService.Installers
@@ -26,18 +28,35 @@ namespace ExceptionsHandlerService.Installers
 		{
 			BindHandlerContainers();
 			BindHandlers();
+			InstallFactories();
+			BindFormatters();
 			BindServices();
 		}
 
-		private void BindContexts()
+		private void BindFormatters()
 		{
-			// Container
-			// 	.BindInterfacesAndSelfTo<StartupExceptionsHandler>()
-			// 	.AsSingle();			
+			Container
+				.BindInterfacesAndSelfTo<ExceptionContextFormatter>()
+				.AsSingle();
+		}
+
+		private void InstallFactories()
+		{
+			Container
+				.BindInterfacesAndSelfTo<ExceptionsContextsFactory>()
+				.AsSingle();
+			
+			Container
+				.BindInterfacesAndSelfTo<WatchEntryFactory>()
+				.AsSingle();
 		}
 
 		private void BindHandlerContainers()
 		{
+			Container
+				.BindInterfacesAndSelfTo<WatchHandlersCache>()
+				.AsSingle();
+			
 			Container
 				.BindInterfacesAndSelfTo<StartupExceptionHandlersContainer>()
 				.AsSingle();

@@ -4,26 +4,26 @@ using ExceptionsHandlerService.Attributes;
 
 namespace ExceptionsHandlerService.Exceptions
 {
-	public class FieldHandler 
+	public class FieldWatchHandler 
 		: BaseWatchHandler
 	{
 		private readonly FieldInfo _info;
 
-		protected override bool IsPrimitive { get; }
+		protected override bool IsGeneric { get; }
 
-		public FieldHandler(FieldInfo info, WatchAttribute attribute)
+		public FieldWatchHandler(FieldInfo info, WatchAttribute attribute)
 			: base(attribute)
 		{
 			_info = info ?? throw new ArgumentNullException(nameof(info));
 			
-			IsPrimitive = _info.FieldType.Assembly.GetName().Name == "System";
+			IsGeneric = _info.FieldType.Assembly.GetName().Name != "System";
 		}
 
-		public override WatchData CreateTraceData(object contextObject)
+		public override WatchData GetWatchData(object contextObject)
 		{
 			return new WatchData
 			(
-				_info.GetValue(contextObject),
+				_info.GetValue(contextObject), 
 				_info.Name,
 				_info.FieldType
 			);

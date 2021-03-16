@@ -1,48 +1,26 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using ExceptionsHandlerService.Attributes;
 
 namespace ExceptionsHandlerService.Exceptions
 {
 	public class ExceptionsContextsFactory
 	{
-		private const BindingFlags MembersFlag = (BindingFlags) ((long) -1);
-		
-		private readonly Type TracingAttribute = typeof(WatchAttribute);
-		
-		private readonly Dictionary<Type, HandlersContainer> _cache 
-			= new Dictionary<Type, HandlersContainer>();
+		private readonly WatchEntryFactory _entriesFactory;
+		private readonly IExceptionContextFormatter _formatter;
 
-		public IReadOnlyDictionary<Type, HandlersContainer> Cache => _cache; 
-		
+		public ExceptionsContextsFactory(WatchEntryFactory entriesFactory, IExceptionContextFormatter formatter)
+		{
+			_entriesFactory = entriesFactory ?? throw new ArgumentNullException(nameof(entriesFactory));
+			_formatter = formatter ?? throw new ArgumentNullException(nameof(formatter));
+		}
+
 		public ExceptionContext Create<T>(T contextualObject)
 			where T : class
 		{
 			var type = typeof(T);
 
-			var members = GetMembers(type);
+			var root = _entriesFactory.CreateRootEntry(type, contextualObject);
 
-			return null;
-		}
-
-		private List<MemberInfo> GetMembers(Type type)
-		{
-			if (type == null)
-			{
-				throw new ArgumentNullException(nameof(type));
-			}
-			var members = type.GetMembers(MembersFlag);
-
-			var attributes = members
-				.Select(m => Attribute.GetCustomAttribute(m, TracingAttribute))
-				.Where(a => a != null)
-				.Cast<WatchAttribute>();
-			
-			// attributes.First().
-
-			return null;
+			return new ExceptionContext(root, _formatter);
 		}
 	}
 }
