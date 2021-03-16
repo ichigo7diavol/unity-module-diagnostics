@@ -34,9 +34,10 @@ namespace DiagnosticsService.Exceptions
 			return CreateEntry(data);
 		}
 
+		//TODO: delegate values check
 		private IWatchEntry CreateEntry(WatchData data)
 		{
-			var value = data.MemberType.IsClass
+			var value = data.MemberType.IsClass && !(data.MemberValue is string)
 				? data.MemberValue == null
 					? "NULL"
 					: data.MemberValue.GetType().Name
