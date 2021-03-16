@@ -48,6 +48,7 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="Properties\Defines.cs" />
         <Compile Include="Sources\Containers\BaseExceptionHandlersContainer.cs" />
         <Compile Include="Sources\Containers\IExceptionHandlersContainer.cs" />
         <Compile Include="Sources\Containers\StartupExceptionHandlersContainer.cs" />
@@ -72,7 +73,6 @@
         <Compile Include="Sources\Installers\DiagnosticsServiceInstaller.cs" />
         <Compile Include="Sources\Logger\ConsoleLogger.cs" />
         <Compile Include="Sources\Logger\ILogger.cs" />
-        <Compile Include="Sources\Test\Program.cs" />
         <Compile Include="Sources\Watches\Attributes\WatchableAttribute.cs" />
         <Compile Include="Sources\Watches\Attributes\WatchAttribute.cs" />
         <Compile Include="Sources\Watches\Entries\Base\BaseWatchEntry.cs" />

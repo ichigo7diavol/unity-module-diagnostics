@@ -1,5 +1,4 @@
 ﻿using System;
-
 #if UNITY
 
 using UnityEngine;
@@ -12,8 +11,6 @@ namespace DiagnosticsService.Logger
 	{
 		public ConsoleLogger()
 		{
-#if UNITY
-#endif
 		}
 
 		public void LogMessage(string message)
@@ -35,6 +32,7 @@ namespace DiagnosticsService.Logger
 #if UNITY
 			Debug.LogError(message);
 #endif
+			
 		}
 
 		public void LogException(Exception exception)
@@ -42,33 +40,6 @@ namespace DiagnosticsService.Logger
 #if UNITY
 			Debug.LogException(exception);
 #endif
-		}
-
-		public class ConsoleAppLogger : ILogger
-		{
-			public ConsoleAppLogger()
-			{
-			}
-
-			public void LogMessage(string message)
-			{
-				Console.WriteLine(message);
-			}
-
-			public void LogWarning(string message)
-			{
-				Console.WriteLine(message);
-			}
-
-			public void LogError(string message)
-			{
-				Console.WriteLine(message);
-			}
-
-			public void LogException(Exception exception)
-			{
-				Console.WriteLine(exception);
-			}
 		}
 	}
 }
