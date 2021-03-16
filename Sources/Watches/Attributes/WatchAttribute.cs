@@ -4,7 +4,8 @@ namespace ExceptionsHandlerService.Attributes
 {
 	[AttributeUsage(AttributeTargets.Field 
 		| AttributeTargets.Property
-		, AllowMultiple = false)
+		, AllowMultiple = false
+		, Inherited = true)
 	]
 	public class WatchAttribute : Attribute
 	{

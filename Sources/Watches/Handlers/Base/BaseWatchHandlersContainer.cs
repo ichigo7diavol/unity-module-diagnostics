@@ -8,7 +8,9 @@ namespace ExceptionsHandlerService.Exceptions
 		: IWatchHandler, IWatchHandlersContainer
 	{
 		private readonly WatchableAttribute _watchableAttribute;
-		
+
+		public abstract Type Type { get; }
+
 		protected BaseWatchHandlersContainer(WatchableAttribute watchableAttribute)
 		{
 			_watchableAttribute = watchableAttribute 

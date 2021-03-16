@@ -4,7 +4,9 @@ namespace ExceptionsHandlerService.Attributes
 {
     [AttributeUsage(AttributeTargets.Class 
                     | AttributeTargets.Struct
-        , AllowMultiple = false)
+                    | AttributeTargets.Interface
+        , AllowMultiple = false
+        , Inherited = true)
     ]
     public class WatchableAttribute : Attribute
     {

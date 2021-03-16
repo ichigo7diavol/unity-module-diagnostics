@@ -94,7 +94,9 @@ namespace unity_module_diagnostics
     [Watchable]
     public struct WatchableStubStruct
     {
-        private int a;
+        public int a;
+        public int b;
+        public int c;
     }
     
     [Watchable]
@@ -112,40 +114,43 @@ namespace unity_module_diagnostics
     }
 
     [Watchable]
+    public interface InterfaceA
+    {
+        [Watch("A")]
+        int __InterA { get; }
+    }
+
+    [Watchable]
+    public class InheritorB 
+        : InterfaceA
+    {
+        [Watch]
+        private int __InherC;
+        
+        public int __InterA => 1;
+    }
+
+    [Watchable]
     public class TestObject
     {
         private readonly StartupExceptionHandlersContainer _exceptionHandlersContainer;
         
-        [Watch("string_value")] 
-        private string _stringValue;
+        // [Watch("string_value")] 
+        // private string _stringValue;
+        //
+        // [Watch("int_value")] 
+        // private int _intValue;
+        //
+        // [Watch("float_value")] 
+        // private float _floatValue;
+        //
+        // [Watch("StubClass")] 
+        // private StubClass[] _StubClass = new StubClass[10];
+        //
+        // [Watch("StubClass")]
+        // private StubClass _StubClass2;
 
-        [Watch("int_value")] 
-        private int _intValue;
-        
-        [Watch("float_value")] 
-        private float _floatValue;
-
-        [Watch("StubClass")] 
-        private StubClass _StubClass = new StubClass();
-        [Watch("StubClassEmpty")] 
-        private StubClassEmpty _StubClassEmpty = new StubClassEmpty();
-        [Watch("WatchableStubClass")] 
-        private WatchableStubClass _WatchableStubClass = new WatchableStubClass();
-        [Watch("StubClass")] 
-        private WatchableStubClassEmpty _WatchableStubClassEmpty = new WatchableStubClassEmpty();
-        [Watch("WatchableStubClassWitchWatches")] 
-        private WatchableStubClassWitchWatches WatchableStubClassWitchWatches = new WatchableStubClassWitchWatches();
-
-        [Watch("StubStruct")] 
-        private StubStruct _StubStruct = new StubStruct();
-        [Watch("StubStructEmpty")] 
-        private StubStructEmpty _StubStructEmpty = new StubStructEmpty();
-        [Watch("WatchableStubStruct")] 
-        private WatchableStubStruct _WatchableStubStruct = new WatchableStubStruct();
-        [Watch("StubStruct")] 
-        private WatchableStubStructEmpty _WatchableStubStructEmpty = new WatchableStubStructEmpty();
-        [Watch("WatchableStubStructWitchWatches")] 
-        private WatchableStubStructWitchWatches WatchableStubStructWitchWatches = new WatchableStubStructWitchWatches();
+        [Watch("StubClass")] private InterfaceA _inter = new InheritorB();
 
         public TestObject(StartupExceptionHandlersContainer exceptionHandlersContainer)
         {

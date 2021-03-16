@@ -17,7 +17,7 @@ namespace ExceptionsHandlerService.Exceptions
 
 		public IWatchContainerEntry CreateRootEntry(Type type, object contextualObject)
 		{
-			var rootHandler = _cache.Get(type);
+			var rootHandler = _cache.Get(contextualObject.GetType());
 			var data = rootHandler.GetWatchData(contextualObject);
 			
 			return CreateContainerEntry(data);
@@ -25,9 +25,11 @@ namespace ExceptionsHandlerService.Exceptions
 		
 		private IWatchEntry Create(WatchData data)
 		{
-			if (data.IsAnyChildData)
+			var containerWatchHandler = _cache.Get(data.MemberValue?.GetType() ?? data.MemberType);
+			
+			if (containerWatchHandler != null)
 			{
-				return CreateContainerEntry(data);
+				return CreateRootEntry(containerWatchHandler.Type, data.MemberValue);
 			}
 			return CreateEntry(data);
 		}
@@ -36,7 +38,7 @@ namespace ExceptionsHandlerService.Exceptions
 		{
 			return new WatchEntry(data.MemberType, data.MemberName, data.MemberValue?.ToString() ?? "NULL");
 		}
-
+		
 		private IWatchContainerEntry CreateContainerEntry(WatchData data)
 		{
 			ICollection<IWatchEntry> childEntries = null;

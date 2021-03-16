@@ -9,7 +9,7 @@ namespace ExceptionsHandlerService.Watches
 {
     public class WatchHandlersCache
     {
-        private const BindingFlags MembersFlag = (BindingFlags) ((long) -1);
+        private const BindingFlags MembersFlag = (BindingFlags) ((long) -1) ^ BindingFlags.DeclaredOnly;
 		
         private readonly Type WatchAttributeType = typeof(WatchAttribute);
         private readonly Type WatchableAttributeType = typeof(WatchableAttribute);
@@ -23,7 +23,9 @@ namespace ExceptionsHandlerService.Watches
             {
                 throw new ArgumentNullException(nameof(type));
             }
-            var watchableAttribute = Attribute.GetCustomAttribute(type, WatchableAttributeType) as WatchableAttribute;
+            
+            var watchableAttribute = type.GetCustomAttribute(WatchableAttributeType, true) 
+                as WatchableAttribute;
             
             if (watchableAttribute == null)
             {
@@ -46,14 +48,36 @@ namespace ExceptionsHandlerService.Watches
             return container;
         }
 
+        private IEnumerable<MemberInfo> GetMembers(Type type)
+        {
+            var membersHash = new HashSet<MemberInfo>();
+
+            do
+            {
+                var members = type.GetMembers(MembersFlag);
+
+                foreach (var member in members)
+                {
+                    if (!membersHash.Contains(member))
+                    {
+                        membersHash.Add(member);
+                    }
+                }
+                type = type.BaseType;
+            } 
+            while (type != null);
+
+            return membersHash;
+        }
+
         private List<IWatchHandler> GetWatchHandlers(Type type)
         {
-            var members = type.GetMembers(MembersFlag).ToList();
             var watches = new List<IWatchHandler>();
+            var members = GetMembers(type);
             
             foreach (var member in members)
             {
-                var attribute = Attribute.GetCustomAttribute(member, WatchAttributeType);
+                var attribute = Attribute.GetCustomAttribute(member, WatchAttributeType, true);
 
                 if (attribute == null)
                 {

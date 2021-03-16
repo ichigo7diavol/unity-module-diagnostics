@@ -11,6 +11,8 @@ namespace ExceptionsHandlerService.Exceptions
 
 		protected override bool IsGeneric { get; }
 
+		public override Type Type => _info.FieldType;
+		
 		public FieldWatchHandler(FieldInfo info, WatchAttribute attribute)
 			: base(attribute)
 		{

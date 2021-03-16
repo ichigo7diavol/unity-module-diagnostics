@@ -10,6 +10,8 @@ namespace ExceptionsHandlerService.Exceptions
 
 		protected abstract bool IsGeneric { get; }
 
+		public abstract Type Type { get; }
+
 		protected BaseWatchHandler(WatchAttribute attribute)
 		{
 			Attribute = attribute ?? throw new ArgumentNullException(nameof(attribute));

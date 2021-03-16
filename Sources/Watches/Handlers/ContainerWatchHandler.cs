@@ -13,10 +13,25 @@ namespace ExceptionsHandlerService.Exceptions
 		private readonly List<IWatchHandler> _watchesCache 
 			= new List<IWatchHandler>();
 
+		public override Type Type => _type;
+
+		private string _description;
+
 		public ContainerWatchHandler(Type type, WatchableAttribute attribute) 
 			: base(attribute)
 		{
 			_type = type ?? throw new ArgumentNullException(nameof(type));
+			_description = Type.Name;
+		}
+		
+		public ContainerWatchHandler(Type type, string description, WatchableAttribute attribute) 
+			: base(attribute)
+		{
+			_type = type ?? throw new ArgumentNullException(nameof(type));
+
+			_description = string.IsNullOrEmpty(_description)
+				? Type.Name
+				: description;
 		}
 
 		public override WatchData GetWatchData(object contextObject)
@@ -25,9 +40,10 @@ namespace ExceptionsHandlerService.Exceptions
 
 			if (_watchesCache.Any())
 			{
-				childData = _watchesCache.Select(w => w.GetWatchData(contextObject));
+				childData = _watchesCache
+					.Select(w => w.GetWatchData(contextObject));
 			}
-			return new WatchData(contextObject, "Context", _type, childData);
+			return new WatchData(contextObject, _description, _type, childData);
 		}
 
 		override public IEnumerable<IWatchHandler> GetMembers()

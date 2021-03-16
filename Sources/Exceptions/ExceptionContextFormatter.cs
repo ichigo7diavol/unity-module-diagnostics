@@ -32,6 +32,8 @@ namespace ExceptionsHandlerService.Exceptions
             if (watch is IWatchContainerEntry container)
             {
                 ProcessContainerEntry(prefix, container);
+                
+                return;
             }
             ProcessEntry(prefix, watch);
         }
@@ -43,7 +45,7 @@ namespace ExceptionsHandlerService.Exceptions
 
         private void ProcessContainerEntry(string prefix, IWatchContainerEntry container)
         {
-            _sb.AppendLine($"{prefix}{container.MemberName}:{container.MemberType} = ");
+            _sb.AppendLine($"{prefix}{container.MemberName}:{container.MemberType.Name} = ");
 
             foreach (var member in container.ChildMembers)
             {
