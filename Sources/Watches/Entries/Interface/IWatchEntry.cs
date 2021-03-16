@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ExceptionsHandlerService.Exceptions
+namespace DiagnosticsService.Exceptions
 {
     public interface IWatchEntry
     {

@@ -69,7 +69,7 @@
         <Compile Include="Sources\Handlers\BaseHandlers\OverflowHandler.cs" />
         <Compile Include="Sources\Handlers\BaseHandlers\TestExceptionHandler.cs" />
         <Compile Include="Sources\Handlers\Interfaces\IExceptionHandler.cs" />
-        <Compile Include="Sources\Installers\ExceptionsHandlerServiceInstaller.cs" />
+        <Compile Include="Sources\Installers\DiagnosticsServiceInstaller.cs" />
         <Compile Include="Sources\Logger\ConsoleLogger.cs" />
         <Compile Include="Sources\Logger\ILogger.cs" />
         <Compile Include="Sources\Test\Program.cs" />

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ExceptionsHandlerService.Exceptions
+namespace DiagnosticsService.Exceptions
 {
 	public class WatchEntry
 		: BaseWatchEntry

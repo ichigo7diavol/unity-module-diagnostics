@@ -1,6 +1,6 @@
 using System;
 
-namespace ExceptionsHandlerService.Exceptions
+namespace DiagnosticsService.Exceptions
 {
 	public class ExceptionsContextsFactory
 	{

@@ -1,6 +1,6 @@
 using System;
 
-namespace ExceptionsHandlerService.Attributes
+namespace DiagnosticsService.Attributes
 {
 	[AttributeUsage(AttributeTargets.Field 
 		| AttributeTargets.Property

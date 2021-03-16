@@ -1,8 +1,8 @@
 using System;
-using ExceptionsHandlerService.Exceptions;
-using ExceptionsHandlerService.Logger;
+using DiagnosticsService.Logger;
+using DiagnosticsService.Exceptions;
 
-namespace ExceptionsHandlerService.Handlers
+namespace DiagnosticsService.Handlers
 {
     public class TestExceptionHandler : BaseExceptionHandler
     {

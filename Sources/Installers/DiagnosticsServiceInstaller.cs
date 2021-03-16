@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using ExceptionsHandlerService.Containers;
-using ExceptionsHandlerService.Exceptions;
-using ExceptionsHandlerService.Handlers;
-using ExceptionsHandlerService.Logger;
-using ExceptionsHandlerService.Watches;
+using DiagnosticsService.Containers;
+using DiagnosticsService.Exceptions;
+using DiagnosticsService.Handlers;
+using DiagnosticsService.Logger;
+using DiagnosticsService.Watches;
 using Zenject;
 
-namespace ExceptionsHandlerService.Installers
+namespace DiagnosticsService.Installers
 {
-	public class ExceptionsHandlerServiceInstaller : Installer
+	public class DiagnosticsServiceInstaller : Installer
 	{
 		private readonly IReadOnlyList<System.Type> _baseHandlers
 			= new List<System.Type>

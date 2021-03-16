@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using ExceptionsHandlerService.Attributes;
+using DiagnosticsService.Attributes;
 
-namespace ExceptionsHandlerService.Exceptions
+namespace DiagnosticsService.Exceptions
 {
 	public abstract class BaseWatchHandlersContainer
 		: IWatchHandler, IWatchHandlersContainer

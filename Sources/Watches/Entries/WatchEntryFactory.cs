@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ExceptionsHandlerService.Watches;
+using DiagnosticsService.Watches;
 
-namespace ExceptionsHandlerService.Exceptions
+namespace DiagnosticsService.Exceptions
 {
 	public class WatchEntryFactory
 	{
@@ -36,7 +36,13 @@ namespace ExceptionsHandlerService.Exceptions
 
 		private IWatchEntry CreateEntry(WatchData data)
 		{
-			return new WatchEntry(data.MemberType, data.MemberName, data.MemberValue?.ToString() ?? "NULL");
+			var value = data.MemberType.IsClass
+				? data.MemberValue == null
+					? "NULL"
+					: data.MemberValue.GetType().Name
+				: data.MemberValue.ToString();
+			
+			return new WatchEntry(data.MemberType, data.MemberName, value);
 		}
 		
 		private IWatchContainerEntry CreateContainerEntry(WatchData data)

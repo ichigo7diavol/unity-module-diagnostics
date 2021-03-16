@@ -1,4 +1,4 @@
-namespace ExceptionsHandlerService.Exceptions
+namespace DiagnosticsService.Exceptions
 {
     public interface IExceptionContextFormatter
     {

@@ -6,7 +6,7 @@ using UnityEngine;
 
 #endif
 
-namespace ExceptionsHandlerService.Logger
+namespace DiagnosticsService.Logger
 {
 	public class ConsoleLogger : ILogger
 	{

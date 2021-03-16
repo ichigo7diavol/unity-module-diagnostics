@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ExceptionsHandlerService.Logger
+namespace DiagnosticsService.Logger
 {
 	public interface ILogger
 	{

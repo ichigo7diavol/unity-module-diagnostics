@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Text;
 
-namespace ExceptionsHandlerService.Exceptions
+namespace DiagnosticsService.Exceptions
 {
     public class ExceptionContextFormatter 
         : IExceptionContextFormatter
@@ -40,7 +40,7 @@ namespace ExceptionsHandlerService.Exceptions
 
         private void ProcessEntry(string prefix, IWatchEntry entry)
         {
-            _sb.AppendLine($"{prefix}{entry.MemberName}:{entry.MemberType} = {entry.AsStringEntry().First()}");
+            _sb.AppendLine($"{prefix}{entry.MemberName}:{entry.MemberType.Name} = {entry.AsStringEntry().First()}");
         }
 
         private void ProcessContainerEntry(string prefix, IWatchContainerEntry container)

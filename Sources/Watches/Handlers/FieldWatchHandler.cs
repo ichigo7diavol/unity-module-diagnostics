@@ -1,8 +1,8 @@
 using System;
 using System.Reflection;
-using ExceptionsHandlerService.Attributes;
+using DiagnosticsService.Attributes;
 
-namespace ExceptionsHandlerService.Exceptions
+namespace DiagnosticsService.Exceptions
 {
 	public class FieldWatchHandler 
 		: BaseWatchHandler

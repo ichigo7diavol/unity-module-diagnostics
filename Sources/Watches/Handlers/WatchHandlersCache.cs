@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using ExceptionsHandlerService.Attributes;
-using ExceptionsHandlerService.Exceptions;
+using DiagnosticsService.Attributes;
+using DiagnosticsService.Exceptions;
 
-namespace ExceptionsHandlerService.Watches
+namespace DiagnosticsService.Watches
 {
     public class WatchHandlersCache
     {

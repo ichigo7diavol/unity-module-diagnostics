@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace ExceptionsHandlerService.Exceptions
+namespace DiagnosticsService.Exceptions
 {
     public interface IWatchContainerEntry
         : IWatchEntry

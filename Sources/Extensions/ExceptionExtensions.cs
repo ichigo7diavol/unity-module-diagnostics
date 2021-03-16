@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ExceptionsHandlerService.Extensions
+namespace DiagnosticsService.Extensions
 {
 	public static class ExceptionExtensions
 	{

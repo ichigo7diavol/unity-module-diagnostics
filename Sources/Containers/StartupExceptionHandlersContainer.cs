@@ -1,13 +1,13 @@
 using System.Collections.Generic;
-using ExceptionsHandlerService.Exceptions;
-using ExceptionsHandlerService.Handlers;
-using ExceptionsHandlerService.Logger;
+using DiagnosticsService.Exceptions;
+using DiagnosticsService.Handlers;
+using DiagnosticsService.Logger;
 using unity_module_diagnostics;
 
-namespace ExceptionsHandlerService.Containers
+namespace DiagnosticsService.Containers
 {
 	public class StartupExceptionHandlersContainer 
-		: BaseExceptionHandlersContainer<TestObject>
+		: BaseExceptionHandlersContainer
 	{
 		public StartupExceptionHandlersContainer(ILogger logger
 			, List<IExceptionHandler> exceptionsHandlers

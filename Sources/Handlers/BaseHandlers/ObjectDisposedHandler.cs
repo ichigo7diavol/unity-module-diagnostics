@@ -1,7 +1,7 @@
 using System;
-using ExceptionsHandlerService.Logger;
+using DiagnosticsService.Logger;
 
-namespace ExceptionsHandlerService.Handlers
+namespace DiagnosticsService.Handlers
 {
 	public class ObjectDisposedHandler 
 		: BaseExceptionHandler

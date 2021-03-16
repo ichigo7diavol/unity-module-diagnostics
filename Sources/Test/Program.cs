@@ -1,7 +1,7 @@
 ﻿using System;
-using ExceptionsHandlerService.Attributes;
-using ExceptionsHandlerService.Containers;
-using ExceptionsHandlerService.Installers;
+using DiagnosticsService.Attributes;
+using DiagnosticsService.Containers;
+using DiagnosticsService.Installers;
 using Zenject;
 
 namespace unity_module_diagnostics
@@ -36,7 +36,7 @@ namespace unity_module_diagnostics
 
             public void InstallModule()
             {
-                _container.Install<ExceptionsHandlerServiceInstaller>();
+                _container.Install<DiagnosticsServiceInstaller>();
 
                 _container
                     .BindInterfacesAndSelfTo<TestObject>()
@@ -135,20 +135,20 @@ namespace unity_module_diagnostics
     {
         private readonly StartupExceptionHandlersContainer _exceptionHandlersContainer;
         
-        // [Watch("string_value")] 
-        // private string _stringValue;
-        //
-        // [Watch("int_value")] 
-        // private int _intValue;
-        //
-        // [Watch("float_value")] 
-        // private float _floatValue;
-        //
-        // [Watch("StubClass")] 
-        // private StubClass[] _StubClass = new StubClass[10];
-        //
-        // [Watch("StubClass")]
-        // private StubClass _StubClass2;
+        [Watch("string_value")] 
+        private string _stringValue;
+        
+        [Watch("int_value")] 
+        private int _intValue;
+        
+        [Watch("float_value")] 
+        private float _floatValue;
+        
+        [Watch("StubClass")] 
+        private StubClass[] _StubClass = new StubClass[10];
+        
+        [Watch("StubClass")]
+        private StubClass _StubClass2;
 
         [Watch("StubClass")] private InterfaceA _inter = new InheritorB();
 

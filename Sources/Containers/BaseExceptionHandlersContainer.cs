@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ExceptionsHandlerService.Exceptions;
-using ExceptionsHandlerService.Handlers;
-using ExceptionsHandlerService.Logger;
+using DiagnosticsService.Exceptions;
+using DiagnosticsService.Handlers;
+using DiagnosticsService.Logger;
 
-namespace ExceptionsHandlerService.Containers
+namespace DiagnosticsService.Containers
 {
-	public abstract class BaseExceptionHandlersContainer<T>
+	public abstract class BaseExceptionHandlersContainer
 		: IExceptionHandlersContainer
-		where T : class
 	{
 		private readonly ExceptionsContextsFactory _contextsFactory;
-		private T _contextualObject;
+		private object _contextualObject;
 		
 		protected ILogger Logger { get; }
 		
@@ -34,7 +33,7 @@ namespace ExceptionsHandlerService.Containers
 
 		public void PassContext(object contextualObject)
 		{
-			_contextualObject = (contextualObject as T)  
+			_contextualObject = contextualObject
 			    ?? throw new ArgumentNullException(nameof(contextualObject));
 		}
 

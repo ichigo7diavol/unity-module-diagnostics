@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ExceptionsHandlerService.Containers
+namespace DiagnosticsService.Containers
 {
 	public interface IExceptionHandlersContainer
 	{
