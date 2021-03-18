@@ -57,15 +57,15 @@ namespace DiagnosticsService.Installers
 				.BindInterfacesAndSelfTo<WatchHandlersCache>()
 				.AsSingle();
 			
-			Container
-				.BindInterfacesAndSelfTo<PreloaderExceptionHandlersContainer>()
-				.AsSingle();
+			// Container
+			// 	.BindInterfacesAndSelfTo<StartupExceptionHandlersContainer>()
+			// 	.AsSingle();
 		}
 
 		private void BindHandlers()
 		{
-			BindBaseExceptionHandlersToHandlersContainer<
-				PreloaderExceptionHandlersContainer>();
+			// BindBaseExceptionHandlersToHandlersContainer<
+			// 	StartupExceptionHandlersContainer>();
 		}
 
 		private void BindBaseExceptionHandlersToHandlersContainer<T>()
