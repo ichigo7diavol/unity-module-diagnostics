@@ -4,22 +4,22 @@ namespace DiagnosticsService.ExceptionContext
 {
 	public class ExceptionContext
 	{
-		private readonly IWatchContainerEntry _rootEntry;
 		private readonly IExceptionContextFormatter _formatter;
-		
+		public IWatchContainerEntry RootEntry { get; }
+
 		public ExceptionContext(IWatchContainerEntry rootEntry, IExceptionContextFormatter formatter)
 		{
-			_rootEntry = rootEntry;
+			RootEntry = rootEntry;
 			_formatter = formatter ?? throw new ArgumentNullException(nameof(formatter));
 		}
 
 		public string GetContext()
 		{
-			if (_rootEntry == null)
+			if (RootEntry == null)
 			{
 				return "Root Entry of Watchers is Empty!";
 			}
-			return _formatter.FormatEntries(_rootEntry);
+			return _formatter.FormatEntries(RootEntry);
 		}
 	}
 }

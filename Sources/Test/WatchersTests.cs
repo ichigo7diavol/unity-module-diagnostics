@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using DiagnosticsService.Attributes;
 using DiagnosticsService.Containers;
 using DiagnosticsService.ExceptionContext;
@@ -176,7 +178,37 @@ namespace unity_module_diagnostics.Tests
         {
             var context = _context.CtxFactory.Create(new EmptyClassAndStructContext());
             
-            Assert.NotNull(context);
+            Assert.NotNull(context, "Context can't be NULL even Watchable Object does not has any watchers!");
+
+            context.RootEntry.ChildMembers.Map(e => e, )
+            
+            foreach (var VARIABLE in context.RootEntry.ChildMembers)
+            {
+                
+            }
+        }
+    }
+
+    public static class LINQExtensions
+    {
+        public static IEnumerable<TSource> Map<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, bool> selectorFunction,
+            Func<TSource, IEnumerable<TSource>> getChildrenFunction)
+        {
+            // Add what we have to the stack
+            var flattenedList = source.Where(selectorFunction);
+
+            // Go through the input enumerable looking for children,
+            // and add those if we have them
+            foreach (TSource element in source)
+            {
+                flattenedList = flattenedList
+                    .Concat(getChildrenFunction(element)
+                        .Map(selectorFunction, getChildrenFunction)
+                );
+            }
+            return flattenedList;
         }
     }
 }
