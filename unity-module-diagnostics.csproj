@@ -73,11 +73,11 @@
         <Compile Include="Properties\Defines.cs" />
         <Compile Include="Sources\Containers\BaseExceptionHandlersContainer.cs" />
         <Compile Include="Sources\Containers\IExceptionHandlersContainer.cs" />
-        <Compile Include="Sources\Exceptions\ExceptionContext.cs" />
-        <Compile Include="Sources\Exceptions\ExceptionContextFormatter.cs" />
-        <Compile Include="Sources\Exceptions\ExceptionsContextsFactory.cs" />
-        <Compile Include="Sources\Exceptions\HandlerContextException.cs" />
-        <Compile Include="Sources\Exceptions\IExceptionContextFormatter.cs" />
+        <Compile Include="Sources\ExceptionContext\ExceptionContext.cs" />
+        <Compile Include="Sources\ExceptionContext\ExceptionsContextsFactory.cs" />
+        <Compile Include="Sources\ExceptionContext\Formtters\ExceptionContextFormatter.cs" />
+        <Compile Include="Sources\ExceptionContext\Formtters\IExceptionContextFormatter.cs" />
+        <Compile Include="Sources\ExceptionContext\HandlerContextException.cs" />
         <Compile Include="Sources\Extensions\ExceptionExtensions.cs" />
         <Compile Include="Sources\Handlers\BaseHandlers\ArgumentNullHandler.cs" />
         <Compile Include="Sources\Handlers\BaseHandlers\ArgumentOutOfRangeHandler.cs" />

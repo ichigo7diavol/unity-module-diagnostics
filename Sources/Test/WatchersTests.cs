@@ -1,8 +1,8 @@
 using System;
-using ExceptionsHandlerService.Attributes;
-using ExceptionsHandlerService.Containers;
-using ExceptionsHandlerService.Exceptions;
-using ExceptionsHandlerService.Installers;
+using DiagnosticsService.Attributes;
+using DiagnosticsService.Containers;
+using DiagnosticsService.ExceptionContext;
+using DiagnosticsService.Installers;
 using NUnit.Framework;
 using Zenject;
 
@@ -133,7 +133,7 @@ namespace unity_module_diagnostics.Tests
 
         public void InstallModule()
         {
-            _container.Install<ExceptionsHandlerServiceInstaller>();
+            _container.Install<DiagnosticsServiceInstaller>();
         }
 
         public void Resolve()
